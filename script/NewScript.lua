@@ -1,0 +1,1 @@
+print("helo word im gay") --tst script

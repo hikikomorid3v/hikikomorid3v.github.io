@@ -1,0 +1,6 @@
+getgenv().LoadSilent = false
+getgenv().AutoLoadDisabled = false
+getgenv().NametagNotEnabled = false
+loadstring(game:HttpGet('https://raw.githubusercontent.com/venoxhh/universalscripts/main/rivals/SolaraVenoxWare.lua'))()
+--[[ key is V3N0X-H8BD-3D8H-8J0X (updating every day https://linkvertise.com/126615/venoxware-best-rivals
+--]]

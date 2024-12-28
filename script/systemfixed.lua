@@ -1,0 +1,1 @@
+﻿loadstring(game:HttpGet("https://raw.githubusercontent.com/myaccocwunt55/lordxscriptz/refs/heads/main/systemfixed"))()

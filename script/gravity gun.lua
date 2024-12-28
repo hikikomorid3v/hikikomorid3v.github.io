@@ -1,0 +1,1 @@
+﻿loadstring(game:HttpGet("https://scriptblox.com/raw/Fe-Gravity-Gun_991"))()

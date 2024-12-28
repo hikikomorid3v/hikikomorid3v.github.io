@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://rawscripts.net/raw/Prison-Life-Admin-Commands-19759"))()
