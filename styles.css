@@ -1,0 +1,89 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: #1e1e2f;
+    text-align: center;
+  }
+  
+  /* Header styles */
+  header {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .header-container {
+    max-width: 1200px;
+    margin: auto;
+  }
+  .logo {
+    width: 100px;
+    height: auto;
+  }
+  h1 {
+    margin: 10px 0 0;
+  }
+  
+  /* Features section */
+  .features {
+    padding: 40px;
+  }
+  .features h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .feature-image {
+    width: 300px;
+    height: auto;
+    margin: 10px;
+  }
+  .feature p {
+    max-width: 600px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  /* Download section */
+  .download {
+    background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+    padding: 40px;
+    margin-top: 20px;
+  }
+  .download p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Footer */
+  footer {
+    background: #151525;
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 14px;
+  }
+  
