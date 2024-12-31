@@ -1,108 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="mg/logo.png">
-</head>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hikdev</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Body Styling */
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(180deg, black, white);
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            animation: fadeIn 2s ease-in-out, spinGradient 6s linear infinite;
-            background-size: 400% 400%;
-        }
-
-        /* Container Styling */
-        .container {
-            text-align: center;
-            color: white;
-            animation: fadeInUp 2s ease-out;
-        }
-
-        /* Text Styling */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, black, white);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: spinGradient 6s linear infinite;
-            background-size: 400% 400%;
-        }
-
-        /* Button Styling */
-        button {
-            background: linear-gradient(90deg, black, white);
-            border: none;
-            border-radius: 25px;
-            color: black;
-            font-size: 1rem;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            background-size: 400% 400%;
-            animation: spinGradient 6s linear infinite;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Animation Effects */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes spinGradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrapper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #1e1e2f;
+      color: white;
+    }
+    .container {
+      text-align: center;
+    }
+    #current-version {
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    .button:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+    #message {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ffae42;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>U dont need to visit that website..</h1>
-    </div>
+  <div class="container">
+    <div id="current-version">Current version: 0.0</div>
+    <button class="button" id="check-update">Check for Update</button>
+    <button class="button" id="install-update" disabled>Install Update</button>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    // Set the current version (initially)
+    let currentVersion = "0.0";
+    const repoOwner = "hikikomorid3v"; // Replace with the repo owner
+    const repoName = "hikikomori-executor"; // Replace with the repo name
+    const currentVersionElement = document.getElementById("current-version");
+    const messageElement = document.getElementById("message");
+    const installButton = document.getElementById("install-update");
+
+    document.getElementById("check-update").addEventListener("click", async () => {
+      try {
+        messageElement.textContent = "Checking for updates...";
+        
+        // Fetch releases from GitHub API
+        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch release data");
+        }
+
+        const data = await response.json();
+        const latestVersion = data.tag_name; // Latest release tag
+        const downloadUrl = data.assets[0]?.browser_download_url || data.html_url; // Download link or release URL
+
+        if (latestVersion !== currentVersion) {
+          // Update detected
+          currentVersion = latestVersion;
+          currentVersionElement.textContent = `Current version: ${currentVersion}`;
+          messageElement.textContent = "There is a new update, press the button to install!";
+          installButton.disabled = false;
+          installButton.addEventListener("click", () => {
+            window.open(downloadUrl, "_blank");
+          });
+        } else {
+          // No update
+          messageElement.textContent = "U staying updated";
+        }
+      } catch (error) {
+        console.error(error);
+        messageElement.textContent = "Error checking for updates.";
+      }
+    });
+  </script>
 </body>
 </html>
